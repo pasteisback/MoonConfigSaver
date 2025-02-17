@@ -3,7 +3,7 @@ local HttpService = game:GetService("HttpService")
 local MoonConfigSaver = {}
 local filename = "DefaultMoonConfigSaved.txt"
 
-function MoonConfigSaver:SetConfigFileName(name)
+function MoonConfigSaver:Init(name)
 	if not name then return end
 	
 	local txtfilename = tostring(name)
