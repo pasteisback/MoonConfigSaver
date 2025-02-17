@@ -1,0 +1,38 @@
+local HttpService = game:GetService("HttpService")
+
+local MoonConfigSaver = {}
+local filename = "DefaultMoonConfigSaved.txt"
+
+function MoonConfigSaver:SetConfigFileName(name)
+	if not name then return end
+	
+	local txtfilename = tostring(name)
+	filename = txtfilename..".txt"
+	return filename
+end
+
+function MoonConfigSaver:SaveConfig(certaintable)
+	local configtosave = HttpService:JSONEncode(certaintable)
+	writefile("MoonBedwarsConfigTST.txt", configtosave)
+end
+
+function MoonConfigSaver:LoadConfig(certaintable)
+	if isfile(filename) then
+		local configtoload = readfile(filename)
+		certaintable = HttpService:JSONDecode(configtoload)
+	end
+end
+
+function MoonConfigSaver:DeleteConfig()
+	if isfile(filename) then
+		delfile(filename)
+	end
+end
+
+function MoonConfigSaver:SetConfigToDefault()
+	if isfile(filename) then
+		writefile("")
+	end
+end
+
+return MoonConfigSaver
